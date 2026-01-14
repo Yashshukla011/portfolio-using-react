@@ -131,3 +131,89 @@ body {
   background-color: #333;
   color: #fff;
 }
+.exp-section {
+  padding: 6rem 1.5rem;
+  background-color: #020617; /* Dark Slate 950 color */
+  color: white;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.exp-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 4rem;
+}
+
+.text-indigo {
+  color: #818cf8; /* Indigo 400 */
+}
+
+.exp-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.exp-card {
+  background: rgba(30, 41, 59, 0.5); /* Slate 800 with transparency */
+  border: 1px solid #1e293b;
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.exp-card:hover {
+  border-color: #6366f1; /* Indigo 500 border on hover */
+  transform: translateY(-5px);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.exp-role {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #818cf8;
+}
+
+.exp-company {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+}
+
+.exp-tag {
+  background: rgba(99, 102, 241, 0.1);
+  color: #818cf8;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.exp-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: #94a3b8; /* Slate 400 */
+}
+
+.exp-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 768px) {
+  .exp-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

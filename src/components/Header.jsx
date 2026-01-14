@@ -9,10 +9,11 @@ const Header = () => {
         </a>
         <nav>
           <ul className="flex space-x-6">
-            <li><a href="#home" className="hover:text-indigo-400 transition-colors">Home</a></li>
-            <li><a href="#about" className="hover:text-indigo-400 transition-colors">About</a></li>
-            <li><a href="#projects" className="hover:text-indigo-400 transition-colors">Projects</a></li>
-            <li><a href="#contact" className="hover:text-indigo-400 transition-colors">Contact</a></li>
+            <li><a href="#home" className="hover:text-indigo-400 transition-colors  text-2xl">Home</a></li>
+            <li><a href="#about" className="hover:text-indigo-400 text-2xl transition-colors">About</a></li>
+            <li><a href="#projects" className="hover:text-indigo-400 text-2xl transition-colors">Projects</a></li>
+            <li><a href="#contact" className="hover:text-indigo-400 text-2xl transition-colors">Contact</a></li>
+            <li><a href="#experience" className="hover:text-indigo-400 text-2xl transition-colors">My Journey</a></li>
             
           </ul>
         </nav>

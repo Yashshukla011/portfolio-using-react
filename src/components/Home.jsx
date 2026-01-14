@@ -3,7 +3,7 @@ import myPic from "../assets/img.jpg";
 
 const Home = () => {
   return (
-    <section id="home" className="bg-gray text-white min-h-screen flex flex-col justify-center items-center text-center py-24 bg-gray-800 text-black min-h-screen w-full flex flex-col justify-center items-center text-center py-24">
+    <section id="home" className="bg-gray text-white min-h-screen flex flex-col justify-center items-center text-center py-24 bg-gradient-to-b from-slate-900 to-slate-900 text-black min-h-screen w-full flex flex-col justify-center items-center text-center py-24">
       <div className="max-w-4xl px-4">
 <img
   className="w-50 h-50 rounded-full object-cover mx-auto -mt-15"
@@ -20,7 +20,7 @@ const Home = () => {
         </p>
         <a 
           href="#projects" 
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-xl"
+          className="inline-block mt-8 px-8 py-3 rounded-full bg-indigo-500 hover:bg-indigo-600 transition-all duration-300 font-semibold shadow-lg shadow-indigo-500/30"
         >
           View My Work
         </a>
