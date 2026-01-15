@@ -1,6 +1,6 @@
 import React from "react";
 
-import myResume from "../assets/reume.pdf";
+import myResume from "../assets/resume.pdf";
 const skills = [
   { name: "React.js", icon: "⚛️" },
   { name: "JavaScript (ES6+)", icon: "📜" },
