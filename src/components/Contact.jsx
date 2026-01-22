@@ -51,7 +51,7 @@ function ContactForm() {
   };
 
   return (
-    <div id="contact" className="mx-auto max-w-full max-w-2xl mt-10 p-8 bg-gray-800 rounded-xl shadow-lg py-24 px-6 md:px-20 bg-gradient-to-b from-slate-950 to-slate-950 text-white m-5 ">
+    <div id="contact" className="mx-auto max-w-full max-w-2xl   bg-gray-800 rounded-xl shadow-lg py-24 px-6 md:px-20 bg-gradient-to-b from-slate-950 to-slate-950 text-white ">
       <h2 className="text-3xl font-bold text-center mb-6 text-white ">Contact Me</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
