@@ -2,7 +2,7 @@ import React from 'react';
 
 const projectData = [
   { id: 1, title: 'E-commerce Platform', description: 'Built a full-stack e-commerce website with authentication & payment gateway', tech: ['html', 'css', 'js'], link: 'https://e-commerse-first.vercel.app/' },
-  { id: 2, title: 'Quize Battle game', description: 'Building a Quiz Battle Game in React (work in progress) with timer, scoring & dynamic questions.', tech: ['React', 'tailwindcss'], link: 'https://quizegame-ph31ubuy5-yashshukla011s-projects.vercel.app/' },
+  { id: 2, title: 'Quize Battle game', description: 'Building a Quiz Battle Game in React (work in progress) with timer, scoring & dynamic questions.', tech: ['React', 'tailwindcss'], link: 'https://quizegame-cyan.vercel.app/' },
   { id: 3, title: 'Weather app', description: 'Built a weather forecast app using API with real-time data & responsive design.', tech: ['react', 'Tailwind CSS', 'context'], link: 'https://weather-app-using-react-alpha-one.vercel.app/' },
 ];
 
