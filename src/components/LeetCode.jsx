@@ -1,77 +1,117 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from 'react';
+import { SiLeetcode } from "react-icons/si"; // Yeh icon hamesha dikhega
 
 const LeetCodeCard = () => {
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const username = "yashshukla8796";
 
+  // Backup data agar API fail ho jaye
+  const fallbackData = {
+    totalSolved: 135,
+    easySolved: 50,
+    mediumSolved: 70,
+    hardSolved: 15,
+    totalQuestions: 3300,
+    ranking: 452103,
+    acceptanceRate: 54.2
+  };
+
   useEffect(() => {
-    fetch(`https://leetcode-stats-api.herokuapp.com/${username}`)
-      .then(res => res.json())
-      .then(res => setData(res))
-      .catch(err => console.error(err));
+    const fetchStats = async () => {
+      try {
+        const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
+        const result = await response.json();
+        if (result.status === "success") {
+          setData(result);
+          localStorage.setItem('leetcode_cache', JSON.stringify(result));
+        } else {
+          throw new Error("User not found");
+        }
+      } catch (err) {
+        const cached = localStorage.getItem('leetcode_cache');
+        setData(cached ? JSON.parse(cached) : fallbackData);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchStats();
   }, []);
 
-  if (!data || data.status === "error") return null;
+  if (loading) return (
+    <div className="max-w-2xl mx-auto p-12 text-center text-slate-400 font-mono animate-pulse">
+      SYNCING_LEETCODE_STATS...
+    </div>
+  );
+
+  const solveRate = ((data.totalSolved / data.totalQuestions) * 100).toFixed(1);
 
   return (
-    <div className='bg-gradient-to-b from-slate-950 to-slate-950 relative bg-slate-950 overflow-hidden '>
-    <div className="mt-12 p-8 bg-gradient-to-b from-slate-950 to-slate-950 rounded-3xl border border-yellow-500/10 shadow-2xl max-w-3xl mx-auto text-white">
-      <div className="flex items-center gap-5 mb-8">
-        
-        <img 
-    src="https://raw.githubusercontent.com/LeetCode-OpenSource/leetcode-assets/master/LeetCode_logo_rv.png" 
-    alt="LeetCode" 
-    className="w-12 h-12 object-contain"
-    onError={(e) => {
+    <div className="bg-slate-950 py-10 px-4">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        className="max-w-2xl mx-auto bg-slate-900/50 border border-slate-800 rounded-[2rem] p-8 shadow-2xl relative overflow-hidden"
+      >
+        {/* Glow Effect */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent opacity-30" />
 
-      e.target.src = "https://cdn.iconscout.com/icon/free/png-256/free-leetcode-3521542-2944960.png";
-    }}
-  />
-        <div>
-          <h3 className="text-2xl font-bold tracking-tight">Coding Proficiency</h3>
-          <p className="text-gray-400 text-sm italic">LeetCode Stats</p>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-3 gap-6 text-center mb-10">
-        <div className="p-5 bg-[#1f2937] rounded-2xl border border-green-500/20 hover:border-green-500/50 transition-all">
-          <p className="text-green-400 text-xs font-bold uppercase tracking-widest">Easy</p>
-          <p className="text-4xl font-black mt-1">{data.easySolved}</p>
-        </div>
-        <div className="p-5 bg-[#1f2937] rounded-2xl border border-yellow-500/20 hover:border-yellow-500/50 transition-all">
-          <p className="text-yellow-400 text-xs font-bold uppercase tracking-widest">Medium</p>
-          <p className="text-4xl font-black mt-1">{data.mediumSolved}</p>
-        </div>
-        <div className="p-5 bg-[#1f2937] rounded-2xl border border-red-500/20 hover:border-red-500/50 transition-all">
-          <p className="text-red-400 text-xs font-bold uppercase tracking-widest">Hard</p>
-          <p className="text-4xl font-black mt-1">{data.hardSolved}</p>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <div className="flex justify-between items-end">
-          <div className="flex flex-col">
-            <span className="text-gray-400 text-xs uppercase font-bold">Total Solved</span>
-            <span className="text-2xl font-bold text-white leading-none">{data.totalSolved}</span>
+        <div className="flex justify-between items-center mb-10">
+          <div className="flex items-center gap-4">
+            {/* Yahan Logo Fix hai */}
+            <div className="w-14 h-14 bg-yellow-500/10 rounded-2xl flex items-center justify-center border border-yellow-500/20 shadow-lg">
+              <SiLeetcode className="text-yellow-500 text-3xl" />
+            </div>
+            <div>
+              <h3 className="text-white text-xl font-bold tracking-tight">LeetCode Profile</h3>
+              <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">Node: {username}</p>
+            </div>
           </div>
           <div className="text-right">
-            <span className="text-yellow-500 font-bold text-xs uppercase tracking-widest block">Global Rank</span>
-            <span className="text-lg font-bold text-white">{data.ranking.toLocaleString()}</span>
+             <span className="text-[10px] text-slate-500 font-bold uppercase block tracking-widest mb-1">Rank</span>
+             <span className="text-white font-mono font-bold text-lg">#{data.ranking?.toLocaleString()}</span>
           </div>
         </div>
-        
-     
-        <div className="w-full bg-gray-800 rounded-full h-4 p-1 shadow-inner">
-          <div 
-            className="bg-gradient-to-r from-yellow-500 to-orange-600 h-2 rounded-full shadow-[0_0_15px_rgba(234,179,8,0.4)] transition-all duration-1000 ease-out" 
-            style={{ width: `${(data.totalSolved / data.totalQuestions) * 100}%` }}
-          ></div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-3 gap-4 mb-10">
+          <Stat label="Easy" count={data.easySolved} color="text-emerald-400" />
+          <Stat label="Med" count={data.mediumSolved} color="text-amber-400" />
+          <Stat label="Hard" count={data.hardSolved} color="text-rose-500" />
         </div>
-      </div>
-    </div>
+
+        {/* Progress Bar */}
+        <div className="space-y-4">
+          <div className="flex justify-between items-end text-xs font-mono">
+            <span className="text-slate-400 uppercase tracking-widest">Solve Rate</span>
+            <span className="text-white">{data.totalSolved} / {data.totalQuestions}</span>
+          </div>
+          <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+            <motion.div 
+              initial={{ width: 0 }}
+              whileInView={{ width: `${solveRate}%` }}
+              transition={{ duration: 1.5 }}
+              className="h-full bg-gradient-to-r from-yellow-500 to-orange-600"
+            />
+          </div>
+          <div className="flex justify-between text-[10px] font-mono text-slate-600 uppercase tracking-widest pt-2">
+            <span>Accuracy: {data.acceptanceRate}%</span>
+            <span>Progress: {solveRate}%</span>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 };
+
+// Sub-component for individual stats
+const Stat = ({ label, count, color }) => (
+  <div className="bg-slate-950/50 border border-slate-800 p-4 rounded-2xl text-center hover:border-slate-700 transition-colors">
+    <p className={`${color} text-[10px] font-black uppercase mb-1`}>{label}</p>
+    <p className="text-white text-2xl font-bold font-mono">{count}</p>
+  </div>
+);
 
 export default LeetCodeCard;

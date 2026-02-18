@@ -20,7 +20,7 @@ function App() {
         <Education />
         <Projects />
         <GithubStats />
-       <LeetCodeCard />
+        <LeetCodeCard />
         <Contact />
       </main>
       <Footer /> 
